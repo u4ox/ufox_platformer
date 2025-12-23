@@ -1,0 +1,17 @@
+{
+  "name": "my_pet",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "sass": "^1.95.0",
+    "vite": "^7.2.7"
+  }
+}
