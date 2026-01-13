@@ -1,38 +1,44 @@
+export class ScreenRender {
+    constructor() {
+        this.screenWidth = 0,
+        this.screenHeight = 0,
+        this.app = document.getElementById('app');;
+    }
 
-function get_screen_size() {
-    let w_width = document.documentElement.clientWidth;
-    let w_height = document.documentElement.clientHeight;
+    _getScreenSize() {
+        this.screenHeight = document.documentElement.clientHeight; 
+        this.screenWidth = document.documentElement.clientWidth;
+    }
 
-    return {'w' : w_width, 'h' : w_height};
-}
+    _checkScreen() {
+        this.screenWidth >= this.screenHeight ? this._render() : this._renderError()
+    }
 
-function check_screen(obj) {
-    const app = document.getElementById('app');
+    _render() {
+        this.app.innerHTML = `<div class="render_container">
+                                <div class="sky"></div>
+                                <div class="horizon"></div>
+                                <div class="earth"></div>
+                            </div>`;
+        
+        this.horizon = document.querySelector('.horizon');
+        this.renderContainer = document.querySelector('.render_container');
     
-    obj.w >= obj.h ? render(obj, app) : renderError();
-}
+        if(!this.renderContainer) return;
+        
+        this.renderContainer.style.setProperty('--sky-height', `${this.screenHeight / 3 * 2}px`);
+        this.renderContainer.style.setProperty('--earth-height', `${this.screenHeight / 3}px`);
 
-function render(obj, app) {
-    app.innerHTML = `<div class="render_container">
-                        <div class="sky"></div>
-                        <div class="horizon"></div>
-                        <div class="earth"></div>
-                    </div>`;
+    }
+    _renderError(){
+        app.innerHTML = `<p>высота больше ширины => экран вертикальный</p>`
+    }
+    initRender(){
+        this._getScreenSize();
+        this._checkScreen();
+    }
+    getHorison() {
+        return this.horizon;
+    }
 
-    const renderContainer = document.querySelector('.render_container');
-    
-    if(!renderContainer) return;
-
-    renderContainer.style.setProperty('--sky-height', `${obj.h / 3 * 2}px`);
-    renderContainer.style.setProperty('--earth-height', `${obj.h / 3}px`);
-    
-}
-
-function renderError() {
-    app.innerHTML = `<p>высота больше ширины => экран вертикальный</p>`
-}
-
-export function initRender() {
-    const sizes = get_screen_size();
-    check_screen(sizes);
 }

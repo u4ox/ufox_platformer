@@ -3,6 +3,7 @@
 #app {
     height:100vh;
     width: 100%;
+    overflow: hidden;
 }
 
 .render_container {
@@ -12,12 +13,14 @@
 }
 .sky {
     height: var(--sky-height);
-    background: lightblue;
+    background: var(--sky-color);
+    position: relative;
 }
 
 .earth{
     height: var(--earth-height);
-    background: darkgreen;
+    background: var(--earth-color);
+    position: relative;
 }
 
 .horizon{
@@ -25,10 +28,12 @@
 }
 
 #fox-character {
-    width: 70px;
-    height: 70px;
+    width: var(--fox-size);
+    height: var(--fox-size);
     position: absolute;
-    top: -60px;
-    left: var(--fox-pos-x, 50px);
+    transform:
+        translate(var(--fox-pos-x), calc(var(--fox-size) * -1))
+        scaleX(var(--fox-scale, 1));
+    transform-origin: center bottom;
     z-index: 5;;
 }
